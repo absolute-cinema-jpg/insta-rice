@@ -13,6 +13,9 @@ icondir=~/Desktop/icons/folders
 echo $(basename $selected_file)
 
 case $(basename $selected_file) in
+	"windows xp.jpg")
+		icon="windows xp.icns"
+	;;
 	"japan neon.jpg")
 		icon="red.png"
 	;;
