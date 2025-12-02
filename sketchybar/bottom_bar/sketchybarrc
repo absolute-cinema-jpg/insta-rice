@@ -1,5 +1,7 @@
 #!/bin/bash
 
+CONFIG_DIR="$HOME/github/insta-rice/sketchybar"
+
 source "$CONFIG_DIR/colours.sh" #Loads all defined colours
 
 # This is a demo config to showcase some of the most important commands.
@@ -17,10 +19,10 @@ ITEM_DIR="$CONFIG_DIR/items"
 # If you are looking for other colors, see the color picker:
 # https://felixkratz.github.io/SketchyBar/config/tricks#color-picker
 
-sketchybar --bar  position=top \
+bottom_bar --bar  position=bottom \
                   height=40 \
                   blur_radius=30 \
-                  color=$BAR_COLOUR
+                  color=0xff335ad2
 
 ##### Changing Defaults #####
 # We now change some default values, which are applied to all further items.
@@ -35,36 +37,19 @@ default=(
   background.color=$BG_COLOUR
   background.corner_radius=7
   background.height=24
-  padding_left=2
+  padding_left=0
   padding_right=2
   label.padding_left=4
   label.padding_right=10
   icon.padding_left=10
   icon.padding_right=4
 )
-sketchybar --default "${default[@]}"
+bottom_bar --default "${default[@]}"
 
-bottom_bar &
 
 #Left side items
-source $ITEM_DIR/workspace.sh
-source $ITEM_DIR/front_app.sh
-
-#Left side of notch items
-source $ITEM_DIR/weather.sh
-source $ITEM_DIR/textscroll.sh
-
-#Right side of notch items
-
-
-#Right side items
-source $ITEM_DIR/calendar.sh
-source $ITEM_DIR/battery.sh
-source $ITEM_DIR/cpu.sh
-source $ITEM_DIR/ip_address.sh
-source $ITEM_DIR/tina.sh
-source $ITEM_DIR/media.sh
+source $ITEM_DIR/winXP/start.sh
 
 ##### Force all scripts to run the first time (never do this in a script) #####
-sketchybar --update
+bottom_bar --update
 
