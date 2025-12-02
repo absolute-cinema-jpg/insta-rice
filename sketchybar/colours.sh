@@ -25,7 +25,7 @@ export ICON_COLOUR_ALT=$BLACK
 wallpaperPathname=$(	osascript -e "tell application \"System Events\"
 	get picture of current desktop
 end tell")
-wallpaper=$(basename "$wallpaperPathname")
+export wallpaper=$(basename "$wallpaperPathname")
 echo $wallpaper
 
 case $wallpaper in

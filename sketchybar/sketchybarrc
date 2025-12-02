@@ -44,7 +44,12 @@ default=(
 )
 sketchybar --default "${default[@]}"
 
-bottom_bar &
+if [[ $wallpaper == "windows xp.jpg" ]]; then
+	/opt/homebrew/bin/winXP_bar
+	sketchybar --bar hidden=on
+else
+	winXP_bar --bar hidden=on
+fi
 
 #Left side items
 source $ITEM_DIR/workspace.sh

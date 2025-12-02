@@ -1,0 +1,86 @@
+#!/bin/bash
+
+PLUGIN_DIR="$CONFIG_DIR/plugins"
+ITEM_DIR="$CONFIG_DIR/items"
+
+source "$CONFIG_DIR/colours.sh" #Loads all defined colours
+
+##### Bar Appearance #####
+# Configuring the general appearance of the bar.
+# These are only some of the options available. For all options see:
+# https://felixkratz.github.io/SketchyBar/config/bar
+# If you are looking for other colors, see the color picker:
+# https://felixkratz.github.io/SketchyBar/config/tricks#color-picker
+
+winXP_bar --bar  position=bottom \
+                  height=40 \
+                  blur_radius=30 \
+                  color=0xff335ad2
+
+##### Changing Defaults #####
+# We now change some default values, which are applied to all further items.
+# For a full list of all available item properties see:
+# https://felixkratz.github.io/SketchyBar/config/items
+
+default=(
+  icon.font="SF Pro:Semibold:15.0"
+  icon.color=$ICON_COLOUR
+  label.font="SF Pro:Semibold:15.0"
+  label.color=$LABEL_COLOUR
+  background.color=$BG_COLOUR
+  background.corner_radius=7
+  background.height=24
+  background.padding_left=2
+  background.padding_right=2
+  label.padding_left=8
+  label.padding_right=10
+  icon.padding_left=15
+  icon.padding_right=4
+)
+winXP_bar --default "${default[@]}"
+
+# ----------------------------------
+
+#Left side items
+winXP_bar   --add item start left \
+            --set start background.image='/Users/alexstuart/Desktop/icons/images/winXP/XP Button.png' \
+	    click_script='osascript -e '\''tell application "System Events" to keystroke space using {command down}'\''' \
+	    padding_left=0 \
+	    background.color=$CLEAR
+
+winXP_bar 	--add	item explorer left \
+		--set	explorer background.image=/Users/alexstuart/Desktop/icons/images/winXP/internet_explorer_22592.png \
+			click_script='open -a "Brave Browser"' \
+			background.image.scale=0.07 \
+			background.color=$CLEAR \
+			background.padding_right=0
+			label.padding_right=0
+
+
+source $ITEM_DIR/front_app.sh
+winXP_bar --set front_app	background.color=0xff4c7feb \
+				label.color=$WHITE \
+				icon.color=$WHITE \
+				width=220 \
+				padding_left=0 \
+				background.height=33 
+
+source $ITEM_DIR/winXP/time.sh
+winXP_bar --set time		background.color=0xff408ae2 \
+				click_script='open "https://calendar.proton.me/u/7/month"' \
+				label.color=$WHITE \
+				icon.color=0xff3c59cb \
+				width=dynamic \
+				background.height=40 \
+				background.corner_radius=0 \
+				padding_right=0 \
+				padding_left=0 \
+				icon.padding_left=5 \
+				icon.padding_right=0
+
+
+	
+
+##### Force all scripts to run the first time (never do this in a script) #####
+winXP_bar --update
+
