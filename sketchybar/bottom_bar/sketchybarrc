@@ -1,16 +1,9 @@
 #!/bin/bash
 
-CONFIG_DIR="$HOME/github/insta-rice/sketchybar"
-
-source "$CONFIG_DIR/colours.sh" #Loads all defined colours
-
-# This is a demo config to showcase some of the most important commands.
-# It is meant to be changed and configured, as it is intentionally kept sparse.
-# For a (much) more advanced configuration example see my dotfiles:
-# https://github.com/FelixKratz/dotfiles
-
 PLUGIN_DIR="$CONFIG_DIR/plugins"
 ITEM_DIR="$CONFIG_DIR/items"
+
+source "$CONFIG_DIR/colours.sh" #Loads all defined colours
 
 ##### Bar Appearance #####
 # Configuring the general appearance of the bar.
@@ -37,18 +30,56 @@ default=(
   background.color=$BG_COLOUR
   background.corner_radius=7
   background.height=24
-  padding_left=0
-  padding_right=2
-  label.padding_left=4
+  background.padding_left=2
+  background.padding_right=2
+  label.padding_left=8
   label.padding_right=10
-  icon.padding_left=10
+  icon.padding_left=15
   icon.padding_right=4
 )
 bottom_bar --default "${default[@]}"
 
+# ----------------------------------
 
 #Left side items
-source $ITEM_DIR/winXP/start.sh
+$BAR_NAME   --add item start left \
+            --set start background.image='/Users/alexstuart/Desktop/icons/images/winXP/XP Button.png' \
+	    click_script='osascript -e '\''tell application "System Events" to keystroke space using {command down}'\''' \
+	    padding_left=0 \
+	    background.color=$CLEAR
+
+bottom_bar 	--add	item explorer left \
+		--set	explorer background.image=/Users/alexstuart/Desktop/icons/images/winXP/internet_explorer_22592.png \
+			click_script='open -a "Brave Browser"' \
+			background.image.scale=0.07 \
+			background.color=$CLEAR \
+			background.padding_right=0
+			label.padding_right=0
+
+
+source $ITEM_DIR/front_app.sh
+bottom_bar --set front_app	background.color=0xff4c7feb \
+				label.color=$WHITE \
+				icon.color=$WHITE \
+				width=220 \
+				padding_left=0 \
+				background.height=33 
+
+source $ITEM_DIR/winXP/time.sh
+bottom_bar --set time		background.color=0xff408ae2 \
+				click_script='open "https://calendar.proton.me/u/7/month"' \
+				label.color=$WHITE \
+				icon.color=0xff3c59cb \
+				width=dynamic \
+				background.height=40 \
+				background.corner_radius=0 \
+				padding_right=0 \
+				padding_left=0 \
+				icon.padding_left=5 \
+				icon.padding_right=0
+
+
+	
 
 ##### Force all scripts to run the first time (never do this in a script) #####
 bottom_bar --update
