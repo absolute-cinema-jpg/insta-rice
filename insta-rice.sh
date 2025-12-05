@@ -1,10 +1,17 @@
 #! /bin/zsh
 
+wallpaperPathname=$(osascript -e 'tell app "System Events" to launch' -e 'tell app "System Events" to get picture of current desktop')
+
 selected_file=$(osascript -e 'POSIX path of (choose file)')
+
+if [[ "$selected_file" == "" ]]; then
+	exit 1
+fi
 
 osascript -e "tell application \"System Events\"
 set picture of every desktop to \"$selected_file\"
 end tell"
+
 /opt/homebrew/bin/sketchybar --reload
 /opt/homebrew/bin/bottom_bar --reload
 /opt/homebrew/bin/winXP_bar --reload
@@ -35,6 +42,6 @@ case $(basename $selected_file) in
 		icon="elden ring.png"
 	;;
 esac
-find $targetdir -maxdepth 1 -mindepth 1 -type d -exec fileicon set {} $icondir/$icon \; 2>/tmp/insta-rice/err 1>/tmp/insta-rice/out
+find $targetdir -maxdepth 1 -mindepth 1 -type d -exec fileicon set {} $icondir/$icon \;
 
 killall Finder
