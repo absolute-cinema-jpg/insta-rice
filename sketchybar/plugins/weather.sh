@@ -1,3 +1,3 @@
 #!/bin/bash
 
-sketchybar --set $NAME label="$(curl wttr.in/london?format=%t)"
+$BAR_NAME --set $NAME label="$(curl wttr.in/london?format=%t)"

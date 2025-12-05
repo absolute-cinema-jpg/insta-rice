@@ -22,9 +22,7 @@ export BG_COLOUR_ALT=$WHITE
 export LABEL_COLOUR_ALT=$BLACK
 export ICON_COLOUR_ALT=$BLACK
 
-wallpaperPathname=$(	osascript -e "tell application \"System Events\"
-	get picture of current desktop
-end tell")
+wallpaperPathname=$(osascript -e 'tell app "System Events" to launch' -e 'tell app "System Events" to get picture of current desktop')
 export wallpaper=$(basename "$wallpaperPathname")
 echo $wallpaper
 
@@ -44,6 +42,7 @@ export BAR_COLOUR=0x8c3f1c42
 export BG_COLOUR=0xffde2931
 export LABEL_COLOUR=0xffdacca5
 export ICON_COLOUR=0xff7bb69c
+export BAR_COLOUR_ALT=0x5b3f1c42
 export BG_COLOUR_ALT=0xffdacca5
 export LABEL_COLOUR_ALT=0xff3f1c42
 export ICON_COLOUR_ALT=$LABEL_COLOUR_ALT

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export MAIN_DIR="~/github/insta-rice/sketchybar"
+export MAIN_DIR="$HOME/github/insta-rice/sketchybar"
 export MAIN_ITEM_DIR="$MAIN_DIR/items"
 export MAIN_PLUGIN_DIR="$MAIN_DIR/plugins"
 
@@ -10,7 +10,6 @@ sketchybar --bar  position=top \
                   height=40 \
                   blur_radius=30 \
                   color=$BAR_COLOUR \
-		  hidden=on
 
 default=(
   background.color=$BG_COLOUR
@@ -29,11 +28,76 @@ default=(
 )
 sketchybar --default "${default[@]}"
 
-
-
-
 if [[ $wallpaper == "windows xp.jpg" ]]; then
-	winXP_bar --reload
 	sketchybar --bar hidden=on
-else
-	winXP_bar --bar 
+fi
+
+#LEFT
+sketchybar 	--add item workspace left \
+             	--set workspace \
+		script="$MAIN_PLUGIN_DIR/workspace.sh" \
+                icon.padding_left=0 \
+                update_freq=1 \
+             	--subscribe workspace front_app_switched
+
+sketchybar	--add item front_app left \
+		--set front_app \
+		script="$MAIN_PLUGIN_DIR/front_app.sh" \
+		background.color=$BG_COLOUR \
+		label.color=$LABEL_COLOUR \
+		icon.font="sketchybar-app-font:Regular:16.0" \
+		--subscribe front_app front_app_switched
+
+sketchybar	--add item media q \
+		--set media \
+		script="$MAIN_PLUGIN_DIR/media.sh" \
+		icon=􀑪 \
+		background.color=$BG_COLOUR_ALT \
+		label.color=$LABEL_COLOUR_ALT \
+		icon.color=$ICON_COLOUR_ALT \
+		scroll_texts=on \
+		label.max_chars=25 \
+		label.scroll_duration=200 \
+		update_freq=15 \
+		click_script='open -a "Spotify"'
+		--subscribe media media_change
+
+
+#RIGHT
+sketchybar  	--add item calendar right \
+            	--set calendar \
+		script="$MAIN_PLUGIN_DIR/calendar.sh" \
+		icon=􀉉 \
+		update_freq=10 \
+		click_script='open "https://calendar.proton.me/u/7/month"'
+
+sketchybar 	--add item vpn right \
+           	--set vpn \
+		script="$MAIN_PLUGIN_DIR/vpn.sh" \
+                update_freq=30 \
+		click_script='open -a "ProtonVPN"' \
+           	--subscribe vpn wifi_change
+
+sketchybar 	--add item battery right \
+		--set battery \
+                script="$MAIN_PLUGIN_DIR/battery.sh" \
+		update_freq=120 \
+	    	--subscribe battery power_source_change
+
+sketchybar	--add item cpu right \
+		--set cpu \
+		script="$MAIN_PLUGIN_DIR/cpu.sh" \
+		icon=􀫥  \
+		update_freq=2 \
+		click_script='open -a "Activity Monitor"'
+
+sketchybar	--add item tina right \
+		--set tina \
+		script="$MAIN_PLUGIN_DIR/tina.sh" \
+		scroll_texts=on \
+		label.max_chars=25 \
+		icon.color=$PINK
+
+
+# ~~~~~~~~~~~~~~~~~
+sketchybar --update

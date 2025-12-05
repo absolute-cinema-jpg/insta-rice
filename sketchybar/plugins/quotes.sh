@@ -2,4 +2,4 @@
 
 TEXT=$(cat ~/.config/sketchybar/text/quotes.txt)
 
-sketchybar --set $NAME label="$TEXT"
+$BAR_NAME --set $NAME label="$TEXT"

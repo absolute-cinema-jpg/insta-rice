@@ -1,26 +1,16 @@
 #!/bin/bash
 
-PLUGIN_DIR="$CONFIG_DIR/plugins"
-ITEM_DIR="$CONFIG_DIR/items"
+export MAIN_DIR="$HOME/github/insta-rice/sketchybar"
+export MAIN_ITEM_DIR="$MAIN_DIR/items"
+export MAIN_PLUGIN_DIR="$MAIN_DIR/plugins"
 
-source "$CONFIG_DIR/colours.sh" #Loads all defined colours
+source "$MAIN_DIR/colours.sh"
 
-##### Bar Appearance #####
-# Configuring the general appearance of the bar.
-# These are only some of the options available. For all options see:
-# https://felixkratz.github.io/SketchyBar/config/bar
-# If you are looking for other colors, see the color picker:
-# https://felixkratz.github.io/SketchyBar/config/tricks#color-picker
-
-winXP_bar --bar  position=bottom \
-                  height=40 \
-                  blur_radius=30 \
-                  color=0xff335ad2
-
-##### Changing Defaults #####
-# We now change some default values, which are applied to all further items.
-# For a full list of all available item properties see:
-# https://felixkratz.github.io/SketchyBar/config/items
+winXP_bar --bar	position=bottom \
+        	height=40 \
+                blur_radius=30 \
+        	color=0xff335ad2 \
+		hidden=on
 
 default=(
   icon.font="SF Pro:Semibold:15.0"
@@ -39,45 +29,58 @@ default=(
 )
 winXP_bar --default "${default[@]}"
 
-# ----------------------------------
+if [[ $wallpaper == "windows xp.jpg" ]]; then
+	winXP_bar --bar hidden=off
+fi
 
 #Left side items
-winXP_bar   --add item start left \
-            --set start background.image='/Users/alexstuart/Desktop/icons/images/winXP/XP Button.png' \
-	    click_script='osascript -e '\''tell application "System Events" to keystroke space using {command down}'\''' \
-	    padding_left=0 \
-	    background.color=$CLEAR
+winXP_bar	--add item start left \
+		--set start \
+		background.image='/Users/alexstuart/Desktop/icons/images/winXP/XP Button.png' \
+		click_script='osascript -e '\''tell application "System Events" to keystroke space using {command down}'\''' \
+		background.color=$CLEAR
 
 winXP_bar 	--add	item explorer left \
-		--set	explorer background.image=/Users/alexstuart/Desktop/icons/images/winXP/internet_explorer_22592.png \
-			click_script='open -a "Brave Browser"' \
-			background.image.scale=0.07 \
-			background.color=$CLEAR \
-			background.padding_right=0
-			label.padding_right=0
+		--set	explorer \
+		background.image=/Users/alexstuart/Desktop/icons/images/winXP/internet_explorer_22592.png \
+		click_script='open -a "Brave Browser"' \
+		background.image.scale=0.07 \
+		background.color=$CLEAR \
+		background.padding_right=0 \
+		label.padding_right=0
 
+winXP_bar	--add item front_app left \
+		--set front_app \
+		script="$MAIN_PLUGIN_DIR/front_app.sh" \
+		icon.font="sketchybar-app-font:Regular:16.0" \
+		background.color=0xff4c7feb \
+		label.color=$WHITE \
+		icon.color=$WHITE \
+		width=220 \
+		padding_left=0 \
+		background.height=33 \
+		--subscribe front_app front_app_switched
 
-source $ITEM_DIR/front_app.sh
-winXP_bar --set front_app	background.color=0xff4c7feb \
-				label.color=$WHITE \
-				icon.color=$WHITE \
-				width=220 \
-				padding_left=0 \
-				background.height=33 
-
-source $ITEM_DIR/winXP/time.sh
-winXP_bar --set time		background.color=0xff408ae2 \
-				click_script='open "https://calendar.proton.me/u/7/month"' \
-				label.color=$WHITE \
-				icon.color=0xff3c59cb \
-				width=dynamic \
-				background.height=40 \
-				background.corner_radius=0 \
-				padding_right=0 \
-				padding_left=0 \
-				icon.padding_left=5 \
-				icon.padding_right=0
-
+winXP_bar	--add item time right \
+            	--set time \
+		script="$MAIN_PLUGIN_DIR/winXP/time.sh" \
+		update_freq=10 \
+		background.color=0xff408ae2 \
+		click_script='open "https://calendar.proton.me/u/7/month"' \
+		label.color=$WHITE \
+		icon.color=0xff3c59cb \
+		width=dynamic \
+		background.height=40 \
+		background.corner_radius=0 \
+		padding_right=0 \
+		padding_left=0 \
+		icon.padding_left=5 \
+		icon.padding_right=0
+				
+source "$ITEM_DIR/winXP/time.sh"
+winXP_bar --set time		
+background.color=0xff408ae2 \
+				
 
 	
 
