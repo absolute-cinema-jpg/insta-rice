@@ -51,7 +51,7 @@ bottom_bar	--add item quotes center \
 #RIGHT
 bottom_bar	--add item image right \
 		--set image \
-		background.image='/Users/alexstuart/Library/CloudStorage/ProtonDrive-alexdnstuart@protonmail.com-folder/03-reactions/picture/live slug reaction/548e333442bb6c0ca7adb565f4018fd5.jpg' \
+		background.image='/Users/alexstuart/Desktop/icons/images/live slug reaction.jpg' \
 		background.image.scale=0.065 \
 		background.color=$CLEAR
 #~~~~~~~~~~~~~~~~~~
