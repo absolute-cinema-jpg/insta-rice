@@ -53,7 +53,8 @@ bottom_bar	--add item image right \
 		--set image \
 		background.image='/Users/alexstuart/Desktop/icons/images/live slug reaction.jpg' \
 		background.image.scale=0.065 \
-		background.color=$CLEAR
+		background.color=$CLEAR \
+		click_script="say 'lyve slug reaction'"
 #~~~~~~~~~~~~~~~~~~
 bottom_bar --update
 
