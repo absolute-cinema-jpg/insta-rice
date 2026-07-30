@@ -255,10 +255,13 @@ Your actions speak so loudly, I can not hear what you are saying
         
 Never interrupt your enemy when he is making a mistake
  - Napoleon
-
+        
 Seek simplicity and distrust it
  - Alfred North Whitehead
         
 History is a fact which sooner or later becomes a lie. Myth is a lie which sooner or later becomes a fact
  - Jean Cocteau
-        
+	
+Truth is stranger than fiction. Fiction has to make sense
+ - Mark Twain
+ 	
