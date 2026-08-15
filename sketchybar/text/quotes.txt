@@ -265,3 +265,5 @@ History is a fact which sooner or later becomes a lie. Myth is a lie which soone
 Truth is stranger than fiction. Fiction has to make sense
  - Mark Twain
  	
+An expert is someone who has made all the mistakes that can be made in a very narrow field
+ - Niels Bohr
