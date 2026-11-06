@@ -24,7 +24,7 @@ echo $(basename $selected_file)
 case $(basename $selected_file) in
 	"windows xp.jpg")
 		icon="windows xp.icns"
-		afplay '/Users/alexstuart/Library/Sounds/Microsoft Windows XP Startup Sound.mp3'
+		afplay "$HOME/Library/Sounds/Microsoft Windows XP Startup Sound.mp3"
 	;;
 	"japan neon.jpg")
 		icon="red.png"
